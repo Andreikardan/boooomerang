@@ -3,12 +3,15 @@
 // Главное не используй всё вместе!
 
 const keypress = require('keypress');
+const Boomerang = require('./game-models/Boomerang');
+const Hero = require('./game-models/Hero');
+const b = new Hero({position:2})
 
 // Управление.
 // Настроим соответствия нажатий на клавиши и действий в игре.
 
 const keyboard = {
-  q: () => console.log('q'),
+  q: () => b.moveRight(),
   w: () => console.log('w'),
   e: () => console.log('e'),
   r: () => console.log('r'),
