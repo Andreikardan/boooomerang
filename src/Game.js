@@ -7,7 +7,7 @@ const Enemy = require('./game-models/Enemy');
 const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 const runInteractiveConsole = require('./keyboard');
-
+const { play } = require('sound-play');
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
@@ -15,7 +15,7 @@ const runInteractiveConsole = require('./keyboard');
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
-    this.hero = new Hero({position:4}); // Герою можно аргументом передать бумеранг.
+    this.hero = new Hero({ position: 4 }); // Герою можно аргументом передать бумеранг.
     this.enemy = new Enemy();
     this.view = new View();
     this.track = [];
@@ -25,28 +25,25 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = (new Array(this.trackLength)).fill(' ');
+    this.track = new Array(this.trackLength).fill(' ');
     this.track[this.hero.position] = this.hero.skin;
-   
-    
   }
 
   check() {
     if (this.hero.position === this.enemy.position) {
       this.hero.die();
     }
+    // добавление звука
+    play('./sounds/just-like-magic.wav');
   }
 
-   play() {
-     setInterval(() => {
-     
-      
-     
+  play() {
+    setInterval(() => {
       this.check();
       this.regenerateTrack();
-      
-       this.view.render(this.track);
-    });
+
+      this.view.render(this.track);
+    }, 1000);
   }
 }
 
