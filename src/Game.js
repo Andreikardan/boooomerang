@@ -16,9 +16,11 @@ const { play } = require('sound-play');
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
+
     this.boomerang= new Boomerang({position:0})
     this.hero = new Hero({position:0}); // Герою можно аргументом передать бумеранг.
     this.enemy = new Enemy({position:10});
+
     this.view = new View();
     this.track = [];
     this.contact = 0;
@@ -31,9 +33,11 @@ class Game {
     this.track = new Array(this.trackLength).fill(' ');
     this.track[this.hero.position] = this.hero.skin;
 
+
     this.track[this.boomerang.position] = this.boomerang.skin;
     this.track[this.enemy.position] = this.enemy.skin;
    
+
   }
 
   check() {
@@ -62,11 +66,13 @@ class Game {
   }
    play() {
      setInterval(() => {
-     
+
+
       this.check();
       this.regenerateTrack();
       runInteractiveConsole()
        this.view.render(this.track);
+
     },100);
     // добавление звука
 
