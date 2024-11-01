@@ -8,5 +8,6 @@ const game = new Game({
 });
 
 
+
 // Запуск игры.
 game.play();
